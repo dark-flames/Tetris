@@ -8,8 +8,9 @@ class Tetrimino(ABC):
     position: Position
     blocks: Blocks
 
-    def __init__(self, x: int, y: int) -> None:
-        self.position = (x, y)
+    def __init__(self, position: Position) -> None:
+        self.position = position
+        self.update_blocks()
 
     def peek_left(self: Self) -> Self:
         return deepcopy(self).move_left()
