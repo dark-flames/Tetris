@@ -2,12 +2,12 @@ from abc import ABC, abstractmethod
 
 from ..tetriminos.tetrimino import Tetrimino
 from ..block_map import BlockMap
-from ..internal import Self
+from ..internal import Self, Position
 
 
 class Strategy(ABC):
     @abstractmethod
-    def get_next_tetrimino(self) -> Tetrimino:
+    def generate_tetrimino(self, position: Position) -> Tetrimino:
         ...
 
     @abstractmethod
