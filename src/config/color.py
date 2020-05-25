@@ -1,25 +1,46 @@
-from enum import Enum
-from typing import List
+from enum import IntEnum
+from typing import List, Dict
 
 
-class Color(Enum):
-    RED = "#f44336"
-    PINK = "#e91e63"
-    PURPLE = "#9c27b0"
-    DEEP_PURPLE = "#673ab7"
-    INDIGO = "#3f51b5"
-    BLUE = "#2196f3"
-    CYAN = "#00bcd4"
-    TEAL = "#009688"
-    GREEN = "#4caf50"
-    YELLOW = "#ffeb3b"
-    AMBER = "#ffc107"
-    ORANGE = "#ff9800"
-    BROWN = "#795548"
-    GRAY = "#9e9e9e"
-    DARK = "#002b36"
-    LIGHT = "##fafafa"
+class Color(IntEnum):
+    RED = 0
+    PINK = 1
+    PURPLE = 2
+    DEEP_PURPLE = 3
+    INDIGO = 4
+    BLUE = 5
+    CYAN = 6
+    TEAL = 7
+    GREEN = 8
+    YELLOW = 9
+    AMBER = 10
+    ORANGE = 11
+    BROWN = 12
+    GRAY = 13
+    DARK = 14
+    LIGHT = 15
 
     @classmethod
-    def get_palette(cls, constant) -> List[str]:
-        return list(cls.__members__.values())
+    def color_map(cls) -> Dict[int, int]:
+        return {
+            cls.RED: 0xf44336,
+            cls.PINK: 0xe91e63,
+            cls.PURPLE: 0x9c27b0,
+            cls.DEEP_PURPLE: 0x673ab7,
+            cls.INDIGO: 0x3f51b5,
+            cls.BLUE: 0x2196f3,
+            cls.CYAN: 0x00bcd4,
+            cls.TEAL: 0x009688,
+            cls.GREEN: 0x4caf50,
+            cls.YELLOW: 0xffeb3b,
+            cls.AMBER: 0xffc107,
+            cls.ORANGE: 0xff9800,
+            cls.BROWN: 0x795548,
+            cls.GRAY: 0x9e9e9e,
+            cls.DARK: 0x002b36,
+            cls.LIGHT: 0xfafafa
+        }
+
+    @classmethod
+    def get_palette(cls) -> List[int]:
+        return list(cls.color_map().values())
