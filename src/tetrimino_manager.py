@@ -32,6 +32,7 @@ class TetriminoManager:
         drop_lines = 0
         if not self.block_map.can_drop(self.__current_tetrimino.blocks):
             drop_lines = self.block_map.achieve(self.__current_tetrimino)
+            self.__strategy.update_block_map(self.block_map)
             self.__new_tetrimino()
             self.__tick_counter.init()
 
