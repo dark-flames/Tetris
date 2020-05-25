@@ -8,7 +8,7 @@ Blocks = List[Position]
 Self = TypeVar("Self")
 
 
-class Entity(ABC):
+class Tetrimino(ABC):
     position: Position
     blocks: Blocks
 
