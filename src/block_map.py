@@ -22,10 +22,10 @@ class BlockMap:
                 list(map(lambda y: None, range(self.__size[0]))))
 
     def get_content(self, position: Position) -> Optional[Color]:
-        return self.__block_map[position[1]][position[0]]
+        return self.__block_map[position.y][position.x]
 
     def set_content(self, position: Position, color: Optional[Color]):
-        self.__block_map[position[1]][position[0]] = color
+        self.__block_map[position.y][position.x] = color
 
     def check(self, blocks: Blocks) -> bool:
         for block in blocks:
@@ -36,8 +36,8 @@ class BlockMap:
 
     def can_drop(self, blocks: Blocks) -> bool:
         for block in blocks:
-            below = Position(block[0], block[1] - 1)
-            if below[1] < 0 or self.get_content(below) is not None:
+            below = block.below()
+            if below.y < 0 or self.get_content(below) is not None:
                 return False
 
         return True
