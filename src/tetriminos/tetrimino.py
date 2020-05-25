@@ -37,6 +37,10 @@ class Tetrimino(ABC):
         return self.position
 
     @abstractmethod
+    def peek_rotate(self: Self) -> Self:
+        ...
+
+    @abstractmethod
     def rotate(self: Self) -> Self:
         ...
 
