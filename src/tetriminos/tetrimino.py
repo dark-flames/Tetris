@@ -1,11 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Tuple, List, TypeVar
+from ..internal import Position, Blocks, Self
 from ..config.color import Color
 from copy import deepcopy
-
-Position = Tuple[int, int]
-Blocks = List[Position]
-Self = TypeVar("Self")
 
 
 class Tetrimino(ABC):
