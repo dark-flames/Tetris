@@ -2,4 +2,6 @@ repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v1.2.3
   hooks:
-    - id: autopep8-wrapper
+    - id: flake8
+      args:
+        - --ignore=E741
