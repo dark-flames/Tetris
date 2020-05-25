@@ -1,5 +1,6 @@
 from typing import List, Tuple, TypeVar
 from dataclasses import dataclass
+from time import time_ns
 
 Size = Tuple[int, int]
 Vec = Tuple[int, int]
@@ -44,6 +45,28 @@ class Counter:
 
     def incr(self):
         self.count += 1
+
+
+class Timer:
+    __time: int
+
+    def __init__(self):
+        self.__time = 0
+
+    def start(self):
+        self.__time = time_ns()
+
+    @property
+    def time_pass_ns(self) -> int:
+        return self.__time
+
+    @property
+    def time_pass_ms(self) -> int:
+        return self.__time // 1000000
+
+
+class DeathException(Exception):
+    pass
 
 
 Blocks = List[Position]

@@ -1,5 +1,5 @@
 from .strategy.strategy import Strategy
-from .internal import Self, Position, Counter
+from .internal import Self, Position, Counter, DeathException
 from .config.config import Config
 from .block_map import BlockMap
 from .tetriminos.tetrimino import Tetrimino
@@ -18,6 +18,14 @@ class TetriminoManager:
         self.__config = config
         self.set_strategy(self.__config.strategy)
         self.__tick_counter = Counter()
+        self.__block_map = BlockMap(self.__config.size)
+        self.init()
+
+    def init(self: Self) -> Self:
+        self.__tick_counter.init()
+        self.block_map.init()
+        self.__new_tetrimino()
+        return self
 
     def set_strategy(self: Self, strategy: Strategy) -> Self:
         self.__strategy = strategy
@@ -32,6 +40,8 @@ class TetriminoManager:
         drop_lines = 0
         if not self.block_map.can_drop(self.__current_tetrimino.blocks):
             drop_lines = self.block_map.achieve(self.__current_tetrimino)
+            if self.block_map.is_lose():
+                raise DeathException
             self.__strategy.update_block_map(self.block_map)
             self.__new_tetrimino()
             self.__tick_counter.init()
@@ -86,7 +96,10 @@ class TetriminoManager:
         if drop_lines:
             return drop_lines
 
-        if not tick % 2 or status.accelerate:
+        accelerate_drop = status.accelerate and tick % self.__config.accelerated_drop_speed
+        normal_drop = tick % self.__config.drop_speed
+
+        if accelerate_drop or normal_drop:
             drop_lines = self.__drop()
 
         return drop_lines
