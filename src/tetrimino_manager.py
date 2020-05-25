@@ -16,6 +16,7 @@ class TetriminoManager:
 
     def __init__(self, config: Config) -> None:
         self.__config = config
+        self.set_strategy(self.__config.strategy)
         self.__tick_counter = Counter()
 
     def set_strategy(self: Self, strategy: Strategy) -> Self:
