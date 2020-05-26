@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
-from ..tetriminos.tetrimino import Tetrimino
-from ..block_map import BlockMap
-from ..internal import Self, Position
+from tetriminos.tetrimino import Tetrimino
+from block_map import BlockMap
+from internal import Self, Position
 
 
 class Strategy(ABC):

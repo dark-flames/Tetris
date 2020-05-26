@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
-from typing import Tuple
+from typing import Tuple, NewType
 
-from ..internal import Position, Blocks, Self, Vec, List
-from ..config.color import Color
+from internal import Position, Blocks, Self, Vec, List
+from config.color import Color
 
-BlockVectors = Tuple[List[Vec], List[Vec], List[Vec], List[Vec]]
+BlockVectors = NewType("BlockVectors", Tuple[List[Vec], List[Vec], List[Vec], List[Vec]])
 
 
 class Tetrimino(ABC):
@@ -31,18 +31,18 @@ class Tetrimino(ABC):
     def peek_right(self: Self) -> Self:
         return deepcopy(self).move_right()
 
-    def move_right(self) -> Self:
+    def move_right(self: Self) -> Self:
         self.position = self.position.right()
         self.update_blocks()
-        return self.position
+        return self
 
     def peek_drop(self: Self) -> Self:
         return deepcopy(self).drop()
 
-    def drop(self) -> Self:
+    def drop(self: Self) -> Self:
         self.position = self.position.below()
         self.update_blocks()
-        return self.position
+        return self
 
     def peek_rotate(self: Self) -> Self:
         return deepcopy(self).rotate()

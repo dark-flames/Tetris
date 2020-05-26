@@ -1,9 +1,9 @@
-from typing import List, Tuple, TypeVar
+from typing import List, Tuple, TypeVar, NewType
 from dataclasses import dataclass
 from time import time_ns
 
-Size = Tuple[int, int]
-Vec = Tuple[int, int]
+Size = NewType('Size', Tuple[int, int])
+Vec = NewType('Vec', Tuple[int, int])
 Self = TypeVar("Self")
 
 
@@ -22,16 +22,16 @@ class Position:
         return self + vec
 
     def below(self: Self) -> Self:
-        return self.peek(Vec(0, -1))
+        return self.peek(Vec([0, -1]))
 
     def above(self: Self) -> Self:
-        return self.peek(Vec(0, 1))
+        return self.peek(Vec([0, 1]))
 
     def left(self: Self) -> Self:
-        return self.peek(Vec(-1, 0))
+        return self.peek(Vec([-1, 0]))
 
     def right(self: Self) -> Self:
-        return self.peek(Vec(1, 0))
+        return self.peek(Vec([1, 0]))
 
 
 class Counter:
@@ -58,11 +58,11 @@ class Timer:
 
     @property
     def time_pass_ns(self) -> int:
-        return self.__time
+        return time_ns() - self.__time
 
     @property
     def time_pass_ms(self) -> int:
-        return self.__time // 1000000
+        return self.time_pass_ns // 1000000
 
 
 class DeathException(Exception):
