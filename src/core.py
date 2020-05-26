@@ -17,6 +17,7 @@ class Core:
     __score: int
     __best_score: int
     __status: Status
+    __key_status: KeyStatus
 
     def __init__(self, config: Config):
         self.__timer = Timer()
@@ -28,7 +29,11 @@ class Core:
         self.__tetrimino_manager = TetriminoManager(self.__config)
         self.__renderer = Renderer(self.__config)
 
+    def __update_key_status(self):
+        self.__key_status += KeyStatus.get_status()
+
     def __update(self) -> None:
+        self.__update_key_status()
         if self.__status == Status.START and pyxel.btn(pyxel.KEY_S):
             self.__tetrimino_manager.init()
             self.__status = Status.GAMING
@@ -37,13 +42,15 @@ class Core:
         elif self.__timer.time_pass_ns > self.__config.get_tick_time(
                 self.__level) and self.__status == Status.GAMING:
             try:
-                lines = self.__tetrimino_manager.process_tick(KeyStatus.get_status())
+                lines = self.__tetrimino_manager.process_tick(self.__key_status)
             except DeathException:
                 self.__status = Status.DEATH
             else:
                 self.__score += lines * self.__config.score_per_line
                 self.__best_score = max(self.__score, self.__best_score)
                 self.__level = self.__score // self.__config.score_per_level
+
+            self.__key_status = KeyStatus.get_status()
 
             self.__timer.start()
 
@@ -65,6 +72,6 @@ class Core:
             palette=Color.get_palette(),
             quit_key=pyxel.KEY_ESCAPE
         )
-
+        self.__key_status = KeyStatus.get_status()
         self.__timer.start()
         pyxel.run(self.__update, self.__render)

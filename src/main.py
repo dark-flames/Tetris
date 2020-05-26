@@ -13,7 +13,7 @@ if __name__ == "__main__":
             pixel_per_block=10,
             block_padding=1,
             strategy=RandomStrategy(),
-            rotate_sampling_interval=1,
+            rotate_sampling_interval=2,
             left_and_right_sampling_interval=1,
             drop_speed=4,
             accelerated_drop_ratio=4,
