@@ -97,13 +97,14 @@ class Config:
     @classmethod
     def from_args(cls, parser: ArgumentParser):
         default_config: Config = deepcopy(cls.default_config())
-        parser.add_argument("--dark-mode", action="store_true")
-        parser.add_argument("--size", action="append_const", const=int, default=default_config.size)
-        parser.add_argument("--lang", type=str, default="en")
+        parser.add_argument("--dark-mode", help="run game in dark mode", action="store_true")
+        parser.add_argument("--size", help="[width][height] game size, default 15 * 20", action="extend", type=int, nargs="+")
+        parser.add_argument("--lang", help="language, default 'en'", type=str, default="en")
 
         args = parser.parse_args()
         default_config.dark_mod = args.dark_mode
-        default_config.size = Size(args.size)
+        if args.size and len(args.size) == 2:
+            default_config.size = Size(args.size)
         default_config.translate = translate_factory(args.lang)
 
         return default_config
