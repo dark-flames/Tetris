@@ -38,6 +38,8 @@ class Core:
             self.__tetrimino_manager.init()
             self.__status = Status.GAMING
         elif pyxel.btn(pyxel.KEY_R):
+            self.__level = 0
+            self.__score = 0
             self.__status = Status.START
         elif self.__timer.time_pass_ns > self.__config.get_tick_time(
                 self.__level) and self.__status == Status.GAMING:
