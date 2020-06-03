@@ -1,7 +1,7 @@
 from functools import reduce
 
 from internal import Size, Blocks, Position
-from tetriminos.tetrimino import Tetrimino
+from entities.entity import Entity
 from typing import List, Optional
 from config.color import Color
 
@@ -80,10 +80,10 @@ class BlockMap:
             False
         )
 
-    def achieve(self, tetrimino: Tetrimino) -> int:
-        for block in tetrimino.blocks:
+    def achieve(self, entity: Entity) -> int:
+        for block in entity.blocks:
             if self.check_border(block):
-                self.set_content(block, tetrimino.color)
+                self.set_content(block, entity.color)
 
         self.__block_map = [
             line

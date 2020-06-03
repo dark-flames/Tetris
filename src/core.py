@@ -1,6 +1,6 @@
 from internal import Timer, DeathException
 from config.config import Config
-from tetrimino_manager import TetriminoManager
+from entity_manager import EntityManager
 from status import KeyStatus
 from render.renderer import Renderer
 from render.content import Content, Status
@@ -10,7 +10,7 @@ import pyxel
 
 class Core:
     __timer: Timer
-    __tetrimino_manager: TetriminoManager
+    __entity_manager: EntityManager
     __renderer: Renderer
     __config: Config
     __level: int
@@ -26,7 +26,7 @@ class Core:
         self.__level = 0
         self.__score = 0
         self.__best_score = 0
-        self.__tetrimino_manager = TetriminoManager(self.__config)
+        self.__entity_manager = EntityManager(self.__config)
         self.__renderer = Renderer(self.__config)
 
     def __update_key_status(self):
@@ -35,7 +35,7 @@ class Core:
     def __update(self) -> None:
         self.__update_key_status()
         if self.__status == Status.START and pyxel.btn(pyxel.KEY_S):
-            self.__tetrimino_manager.init()
+            self.__entity_manager.init()
             self.__status = Status.GAMING
         elif pyxel.btn(pyxel.KEY_R):
             self.__level = 0
@@ -44,7 +44,7 @@ class Core:
         elif self.__timer.time_pass_ns > self.__config.get_tick_time(
                 self.__level) and self.__status == Status.GAMING:
             try:
-                lines = self.__tetrimino_manager.process_tick(self.__key_status)
+                lines = self.__entity_manager.process_tick(self.__key_status)
             except DeathException:
                 self.__status = Status.DEATH
             else:
@@ -59,8 +59,8 @@ class Core:
     def __render(self) -> None:
         self.__renderer.render(Content(
             status=self.__status,
-            block_map=self.__tetrimino_manager.block_map,
-            tetrimino=self.__tetrimino_manager.current_tetrimino,
+            block_map=self.__entity_manager.block_map,
+            entity=self.__entity_manager.current_entity,
             current_score=self.__score,
             best_score=self.__best_score,
             level=self.__level

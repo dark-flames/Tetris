@@ -8,7 +8,7 @@ from config.color import Color
 BlockVectors = NewType("BlockVectors", Tuple[List[Vec], List[Vec], List[Vec], List[Vec]])
 
 
-class Tetrimino(ABC):
+class Entity(ABC):
     position: Position
     blocks: Blocks
     __block_vectors: BlockVectors

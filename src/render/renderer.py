@@ -83,10 +83,10 @@ class Renderer:
                 raw_color = color
             self.__render_block(transformed_position, raw_color)
 
-        for position in content.tetrimino.blocks:
+        for position in content.entity.blocks:
             if content.block_map.check_border(position):
                 transformed_position = self.coordinate_transform(position)
-                self.__render_block(transformed_position, content.tetrimino.color)
+                self.__render_block(transformed_position, content.entity.color)
 
     def render(self, content: Content) -> None:
         if content.status == Status.START:

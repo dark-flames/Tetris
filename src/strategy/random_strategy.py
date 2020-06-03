@@ -1,13 +1,13 @@
 from .strategy import Strategy
 from block_map import BlockMap
 from internal import Self, Position
-from tetriminos.tetrimino import Tetrimino
-from tetriminos.tetrimino_types import TetriminoType
+from entities.entity import Entity
+from entities.tetrimino_types import TetriminoType
 import random
 
 
-class RandomStrategy(Strategy):
-    def generate_tetrimino(self, position: Position) -> Tetrimino:
+class RandomTetrisStrategy(Strategy):
+    def generate_tetrimino(self, position: Position) -> Entity:
         tetrimino_type = random.choice(list(TetriminoType))
         return TetriminoType.create_tetrimino(tetrimino_type, position)
 

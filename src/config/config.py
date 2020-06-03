@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from internal import Size
-from strategy.random_strategy import RandomStrategy
+from strategy.random_strategy import RandomTetrisStrategy
 from strategy.strategy import Strategy
 from .color import Color
 from .translate import Translate, translate_factory
@@ -76,7 +76,7 @@ class Config:
             size=Size([15, 20]),
             pixel_per_block=10,
             block_padding=1,
-            strategy=RandomStrategy(),
+            strategy=RandomTetrisStrategy(),
             rotate_sampling_interval=2,
             left_and_right_sampling_interval=2,
             drop_speed=4,
