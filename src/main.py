@@ -5,7 +5,7 @@ from core import Core
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        prog='Tetris'
+        prog='Tetris Plus'
     )
 
     config: Config = Config.from_args(parser)

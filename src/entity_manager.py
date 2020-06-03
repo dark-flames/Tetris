@@ -32,8 +32,9 @@ class EntityManager:
         return self
 
     def __new_entity(self) -> Entity:
-        return self.__strategy.generate_tetrimino(
-            Position(self.__config.size[0] // 2 + 1, self.__config.size[1])
+        return self.__strategy.generate_entity(
+            Position(self.__config.size[0] // 2 + 1, self.__config.size[1]),
+            self.__config.difficulty
         )
 
     def __update_after_move(self) -> int:

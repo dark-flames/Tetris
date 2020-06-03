@@ -5,6 +5,7 @@ from strategy.random_strategy import RandomTetrisStrategy
 from strategy.strategy import Strategy
 from .color import Color
 from .translate import Translate, translate_factory
+from .difficulty import Difficulty
 from pyxel import FONT_HEIGHT
 from argparse import ArgumentParser
 from copy import deepcopy
@@ -32,6 +33,7 @@ class Config:
     info_text_margin_x: int
     info_text_margin_y: int
     translate: Translate
+    difficulty: Difficulty
 
     @property
     def background_color(self):
@@ -91,7 +93,8 @@ class Config:
             center_text_margin_y=2,
             info_text_margin_x=3,
             info_text_margin_y=1,
-            translate=translate_factory('en')
+            translate=translate_factory('en'),
+            difficulty=Difficulty.NORMAL
         )
 
     @classmethod
@@ -100,11 +103,13 @@ class Config:
         parser.add_argument("--dark-mode", help="run game in dark mode", action="store_true")
         parser.add_argument("--size", help="[width][height] game size, default 15 * 20", action="extend", type=int, nargs="+")
         parser.add_argument("--lang", help="language, default 'en'", type=str, default="en")
+        parser.add_argument("--difficulty", help="'easy', 'hard', or 'normal'", type=str, default='normal')
 
         args = parser.parse_args()
         default_config.dark_mod = args.dark_mode
         if args.size and len(args.size) == 2:
             default_config.size = Size(args.size)
         default_config.translate = translate_factory(args.lang)
+        default_config.difficulty = Difficulty.get_difficulty(args.difficulty)
 
         return default_config
