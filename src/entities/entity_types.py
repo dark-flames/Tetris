@@ -19,6 +19,7 @@ from .q_penta import QPenta
 from .c_penta import CPenta
 from .s_penta import SPenta
 from .z_penta import ZPenta
+from .x_penta import XPenta
 from .big_l_penta import BigLPenta
 
 
@@ -63,6 +64,7 @@ class PentaType(IntEnum):
     C = auto()
     S = auto()
     Z = auto()
+    X = auto()
     BIG_L = auto()
 
     @classmethod
@@ -89,5 +91,7 @@ class PentaType(IntEnum):
             return SPenta(position)
         elif constant is cls.Z:
             return ZPenta(position)
+        elif constant is cls.X:
+            return XPenta(position)
         elif constant is cls.BIG_L:
             return BigLPenta(position)
