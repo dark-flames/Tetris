@@ -5,6 +5,7 @@ from status import KeyStatus
 from render.renderer import Renderer
 from render.content import Content, Status
 from config.color import Color
+from config.sound import play_sound
 import pyxel
 
 
@@ -74,8 +75,7 @@ class Core:
             palette=Color.get_palette(),
             quit_key=pyxel.KEY_ESCAPE
         )
-        self.__config.difficulty.register_sound()
-        self.__config.difficulty.play_sound()
+        play_sound()
         self.__key_status = KeyStatus.get_status()
         self.__timer.start()
         pyxel.run(self.__update, self.__render)
