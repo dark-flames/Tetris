@@ -52,6 +52,14 @@ class Entity(ABC):
         self.update_blocks()
         return self
 
+    def peek_inverse_rotate(self: Self) -> Self:
+        return deepcopy(self).inverse_rotate()
+
+    def inverse_rotate(self: Self) -> Self:
+        self.__status = (self.__status - 1) % 4
+        self.update_blocks()
+        return self
+
     def update_blocks(self: Self) -> Self:
         self.blocks = list(
             map(

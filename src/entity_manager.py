@@ -65,12 +65,18 @@ class EntityManager:
         if self.block_map.check(self.current_entity.peek_rotate().blocks):
             self.current_entity.rotate()
 
+    def __inverse_rotate(self) -> None:
+        if self.block_map.check(self.current_entity.peek_inverse_rotate().blocks):
+            self.current_entity.inverse_rotate()
+
     def process_tick(self, status: KeyStatus) -> int:
         tick = self.__tick_counter.count
         self.__tick_counter.incr()
 
         if status.rotate and tick % self.__config.rotate_sampling_interval == 0:
             self.__rotate()
+        elif status.inverse_rotate and tick % self.__config.rotate_sampling_interval == 0:
+            self.__inverse_rotate()
 
         accelerate_drop = status.accelerate and tick % self.__config.accelerated_drop_speed == 0
         normal_drop = tick % self.__config.drop_speed == 0
