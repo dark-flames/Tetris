@@ -74,6 +74,8 @@ class Core:
             palette=Color.get_palette(),
             quit_key=pyxel.KEY_ESCAPE
         )
+        self.__config.difficulty.register_sound()
+        self.__config.difficulty.play_sound()
         self.__key_status = KeyStatus.get_status()
         self.__timer.start()
         pyxel.run(self.__update, self.__render)
