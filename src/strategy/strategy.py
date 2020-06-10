@@ -15,15 +15,47 @@ class Strategy(ABC):
     def generate_penta(self, position: Position) -> Entity:
         ...
 
+    def generate_tri(self, position: Position) -> Entity:
+        ...
+
+    def generate_ex(self, position: Position) -> Entity:
+        ...
+
+    def generate_inv(self, position: Position) -> Entity:
+        ...
+
     def generate_entity(self, position: Position, difficulty: Difficulty) -> Entity:
         if difficulty == Difficulty.EASY:
             return self.generate_tetrimino(position)
         elif difficulty == Difficulty.NORMAL:
             return self.generate_penta(position)
+        elif difficulty == Difficulty.VERY_EASY:
+            return choice([
+                self.generate_tri,
+                self.generate_tetrimino
+            ])(position)
         elif difficulty == Difficulty.HARD:
             return choice([
                 self.generate_tetrimino,
                 self.generate_penta
+            ])(position)
+        elif difficulty == Difficulty.EX:
+            return choice([
+                self.generate_tetrimino,
+                self.generate_penta,
+                self.generate_ex,
+                self.generate_inv
+            ])(position)
+        elif difficulty == Difficulty.VERY_HARD:
+            return choice([
+                self.generate_tetrimino,
+                self.generate_penta,
+                self.generate_ex
+            ])(position)
+        elif difficulty == Difficulty.INV:
+            return choice([
+                self.generate_tetrimino,
+                self.generate_inv
             ])(position)
 
     @abstractmethod

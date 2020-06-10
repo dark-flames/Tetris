@@ -9,7 +9,7 @@ class OTetrimino(Entity):
             [Vec([-1, 1]), Vec([0, 1]), Vec([-1, 0]), Vec([0, 0])],
             [Vec([-1, 1]), Vec([0, 1]), Vec([-1, 0]), Vec([0, 0])],
             [Vec([-1, 1]), Vec([0, 1]), Vec([-1, 0]), Vec([0, 0])],
-            [Vec([-1, 1]), Vec([0, 1]), Vec([-1, 0]), Vec([0, 0])],
+            [Vec([-1, 1]), Vec([0, 1]), Vec([-1, 0]), Vec([0, 0])]
         ])
 
     @property

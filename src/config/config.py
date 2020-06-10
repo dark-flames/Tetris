@@ -103,7 +103,8 @@ class Config:
         parser.add_argument("--dark-mode", help="run game in dark mode", action="store_true")
         parser.add_argument("--size", help="[width][height] game size, default 15 * 20", action="extend", type=int, nargs="+")
         parser.add_argument("--lang", help="language, default 'en'", type=str, default="en")
-        parser.add_argument("--difficulty", help="'easy', 'hard', or 'normal'", type=str, default='normal')
+        parser.add_argument("--difficulty", help="'easy', 'hard', 'very_easy', 'very_hard','invisible','ex', "
+                                                 "or 'normal'", type=str, default='very_hard')
 
         args = parser.parse_args()
         default_config.dark_mod = args.dark_mode

@@ -21,6 +21,12 @@ from .s_penta import SPenta
 from .z_penta import ZPenta
 from .x_penta import XPenta
 from .big_l_penta import BigLPenta
+from .i_tri import ITri
+from .l_tri import LTri
+from .o_ex import OEx
+from .x_ex import XEx
+from .o_inv import OInv
+from .t_trans import TTrans
 
 
 class TetriminoType(IntEnum):
@@ -95,3 +101,66 @@ class PentaType(IntEnum):
             return XPenta(position)
         elif constant is cls.BIG_L:
             return BigLPenta(position)
+
+
+class TriType(IntEnum):
+    I = auto()
+    L = auto()
+
+    @classmethod
+    def create_tri(cls: Self, constant: Self, position: Position) -> Entity:
+        if constant is cls.I:
+            return ITri(position)
+        elif constant is cls.L:
+            return LTri(position)
+
+
+class ExType(IntEnum):
+    OEx = auto()
+    XEx = auto()
+    ITri = auto()
+    LTri = auto()
+    TTrans = auto()
+
+    @classmethod
+    def create_ex(cls: Self, constant: Self, position: Position) -> Entity:
+        if constant is cls.OEx:
+            return OEx(position)
+        elif constant is cls.XEx:
+            return XEx(position)
+        elif constant is cls.ITri:
+            return ITri(position)
+        elif constant is cls.LTri:
+            return LTri(position)
+        elif constant is cls.TTrans:
+            return TTrans(position)
+
+
+class InvType(IntEnum):
+    I = auto()
+    J = auto()
+    L = auto()
+    O = auto()
+    S = auto()
+    T = auto()
+    Z = auto()
+    O_Inv = auto()
+
+    @classmethod
+    def create_inv(cls: Self, constant: Self, position: Position) -> Entity:
+        if constant is cls.O_Inv:
+            return OInv(position)
+        elif constant is cls.I:
+            return ITetrimino(position)
+        elif constant is cls.J:
+            return JTetrimino(position)
+        elif constant is cls.L:
+            return LTetrimino(position)
+        elif constant is cls.O:
+            return OTetrimino(position)
+        elif constant is cls.S:
+            return STetrimino(position)
+        elif constant is cls.T:
+            return TTetrimino(position)
+        elif constant is cls.Z:
+            return ZTetrimino(position)
